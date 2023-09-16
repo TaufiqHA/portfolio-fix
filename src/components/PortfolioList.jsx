@@ -24,7 +24,7 @@ const PortfolioList = () => {
   };
 
   const destroy = async (id) => {
-    await axios.delete(`http://${process.env.host}:4000/portfolio/${id}`);
+    await axios.delete(`http://${env.HOST}:4000/portfolio/${id}`);
     getData();
   };
 
