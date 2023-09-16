@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import env from "react-dotenv";
 
 const PortfolioList = () => {
   const [data, setData] = useState([]);
@@ -13,17 +14,17 @@ const PortfolioList = () => {
   }, []);
 
   const getData = async () => {
-    const res = await axios.get("http://localhost:4000/portfolio");
+    const res = await axios.get(`http://${env.HOST}:4000/portfolio`);
     setData(res.data);
   };
 
   const modal = async (data) => {
-    const res = await axios.get(`http://localhost:4000/portfolio/${data}`);
+    const res = await axios.get(`http://${env.HOST}:4000/portfolio/${data}`);
     setSingle(res.data);
   };
 
   const destroy = async (id) => {
-    await axios.delete(`http://localhost:4000/portfolio/${id}`);
+    await axios.delete(`http://${process.env.host}:4000/portfolio/${id}`);
     getData();
   };
 

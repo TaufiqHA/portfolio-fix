@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import env from "react-dotenv";
 
 const initialState = {
   portfolio: null,
@@ -13,7 +14,7 @@ export const getPortfolio = createAsyncThunk(
   "portfolio/getPortfolio",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get("http://localhost:4000/portfolio");
+      const response = await axios.get(`http://${env.HOST}:4000/portfolio`);
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -31,7 +32,7 @@ export const createPortfolio = createAsyncThunk(
     formData.append("file", portfolio.file);
     formData.append("title", portfolio.title);
     try {
-      await axios.post("http://localhost:4000/portfolio", formData, {
+      await axios.post(`http://${env.HOST}:4000/portfolio`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -53,7 +54,7 @@ export const updatePortfolio = createAsyncThunk(
     formData.append("file", portfolio.file);
     try {
       await axios.patch(
-        `http://localhost:4000/portfolio/${portfolio.id}`,
+        `http://${env.HOST}:4000/portfolio/${portfolio.id}`,
         formData,
         {
           headers: {

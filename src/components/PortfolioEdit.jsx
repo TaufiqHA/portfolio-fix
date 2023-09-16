@@ -5,6 +5,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { updatePortfolio } from "../features/portfolioSlice";
+import env from "react-dotenv";
 
 const PortfolioEdit = () => {
   const { id } = useParams();
@@ -20,7 +21,7 @@ const PortfolioEdit = () => {
   }, []);
 
   const getData = async () => {
-    const res = await axios.get(`http://localhost:4000/portfolio/${id}`);
+    const res = await axios.get(`http://${env.HOST}:4000/portfolio/${id}`);
     setTitle(res.data.name);
     setData(res.data);
   };

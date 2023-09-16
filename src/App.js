@@ -7,6 +7,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import PortfolioEdit from "./components/PortfolioEdit";
 import Theme from "./components/Theme";
+import env from "react-dotenv";
 
 function App() {
   return (

@@ -2,16 +2,19 @@ import React from "react";
 import Layout from "./Layout";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import env from "react-dotenv";
 
 const Home = () => {
   const [folio, setFolio] = useState([]);
+
+  console.info(env.HOST);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
-    const res = await axios.get("http://localhost:4000/portfolio");
+    const res = await axios.get(`http://${env.HOST}:4000/portfolio`);
     setFolio(res.data);
   };
 
