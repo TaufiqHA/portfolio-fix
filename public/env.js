@@ -1,3 +1,3 @@
 window.env = {
-  "HOST": "localhost"
+  "HOST_API": "http://localhost:4000"
 };

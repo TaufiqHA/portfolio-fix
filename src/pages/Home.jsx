@@ -7,14 +7,14 @@ import env from "react-dotenv";
 const Home = () => {
   const [folio, setFolio] = useState([]);
 
-  console.info(env.HOST);
+  console.info(env.HOST_API);
 
   useEffect(() => {
     getData();
   }, []);
 
   const getData = async () => {
-    const res = await axios.get(`http://${env.HOST}:4000/portfolio`);
+    const res = await axios.get(`${env.HOST_API}/portfolio`);
     setFolio(res.data);
   };
 

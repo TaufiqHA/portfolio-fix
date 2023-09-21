@@ -9,22 +9,22 @@ const PortfolioList = () => {
   const [single, setSingle] = useState([]);
   const navigate = useNavigate();
 
+  const getData = async () => {
+    const res = await axios.get(`${env.HOST_API}/portfolio`);
+    setData(res.data);
+  };
+
   useEffect(() => {
     getData();
   }, []);
 
-  const getData = async () => {
-    const res = await axios.get(`http://${env.HOST}:4000/portfolio`);
-    setData(res.data);
-  };
-
   const modal = async (data) => {
-    const res = await axios.get(`http://${env.HOST}:4000/portfolio/${data}`);
+    const res = await axios.get(`${env.HOST_API}/portfolio/${data}`);
     setSingle(res.data);
   };
 
   const destroy = async (id) => {
-    await axios.delete(`http://${env.HOST}:4000/portfolio/${id}`);
+    await axios.delete(`${env.HOST_API}/portfolio/${id}`);
     getData();
   };
 
@@ -58,6 +58,12 @@ const PortfolioList = () => {
         </form>
       </dialog>
       <div className="w-full h-96 overflow-x-auto">
+        <button
+          className="btn rounded-xl bg-success mt-5 "
+          onClick={() => getData()}
+        >
+          Refresh
+        </button>
         <table className="table table-pin-rows">
           {/* head */}
           <thead>

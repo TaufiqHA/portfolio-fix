@@ -14,7 +14,7 @@ export const getPortfolio = createAsyncThunk(
   "portfolio/getPortfolio",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`http://${env.HOST}:4000/portfolio`);
+      const response = await axios.get(`${env.HOST_API}/portfolio`);
       return response.data;
     } catch (error) {
       if (error.response) {
@@ -32,7 +32,7 @@ export const createPortfolio = createAsyncThunk(
     formData.append("file", portfolio.file);
     formData.append("title", portfolio.title);
     try {
-      await axios.post(`http://${env.HOST}:4000/portfolio`, formData, {
+      await axios.post(`${env.HOST_API}/portfolio`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -53,15 +53,11 @@ export const updatePortfolio = createAsyncThunk(
     formData.append("title", portfolio.title);
     formData.append("file", portfolio.file);
     try {
-      await axios.patch(
-        `http://${env.HOST}:4000/portfolio/${portfolio.id}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      await axios.patch(`${env.HOST_API}/portfolio/${portfolio.id}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
     } catch (error) {
       if (error.response) {
         const message = error.response.data.msg;

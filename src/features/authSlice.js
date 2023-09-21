@@ -14,7 +14,7 @@ export const loginUser = createAsyncThunk(
   "user/loginUser",
   async (user, thunkAPI) => {
     try {
-      const response = await axios.post(`http://${env.HOST}:4000/login`, {
+      const response = await axios.post(`${env.HOST_API}/login`, {
         email: user.email,
         password: user.password,
       });
@@ -30,7 +30,7 @@ export const loginUser = createAsyncThunk(
 
 export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
   try {
-    const response = await axios.get(`http://${env.HOST}:4000/me`);
+    const response = await axios.get(`${env.HOST_API}/me`);
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -41,7 +41,7 @@ export const getMe = createAsyncThunk("user/getMe", async (_, thunkAPI) => {
 });
 
 export const logout = createAsyncThunk("user/logout", async () => {
-  await axios.delete(`http://${env.HOST}:4000/logout`);
+  await axios.delete(`${env.HOST_API}/logout`);
 });
 
 const authSlice = createSlice({

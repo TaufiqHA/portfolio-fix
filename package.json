@@ -48,7 +48,7 @@
   },
   "react-dotenv": {
     "whitelist": [
-      "HOST"
+      "HOST_API"
     ]
   }
 }

@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -9,7 +10,9 @@ const Navbar = () => {
           <div className="logo w-10 max-[400px]:w-7">
             <img src="./img/logo.png" alt="" />
           </div>
-          <h2 className=" max-[400px]:text-md ">Taufiq Hidayah Abdullah</h2>
+          <Link to={"/"} className=" max-[400px]:text-md ">
+            Taufiq Hidayah Abdullah
+          </Link>
         </a>
       </div>
       <div className="flex-none max-[400px]:hidden">

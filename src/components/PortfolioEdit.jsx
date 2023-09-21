@@ -21,7 +21,7 @@ const PortfolioEdit = () => {
   }, []);
 
   const getData = async () => {
-    const res = await axios.get(`http://${env.HOST}:4000/portfolio/${id}`);
+    const res = await axios.get(`${env.HOST_API}/portfolio/${id}`);
     setTitle(res.data.name);
     setData(res.data);
   };

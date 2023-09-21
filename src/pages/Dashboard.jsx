@@ -5,20 +5,27 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { createPortfolio } from "../features/portfolioSlice";
+import { getMe } from "../features/authSlice";
+import env from "react-dotenv";
+import axios from "axios";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, message } = useSelector((state) => state.auth);
+  const { user, isError, message } = useSelector((state) => state.auth);
   const [title, setTitle] = useState("");
   const [file, setFile] = useState("");
   const [preview, setPreview] = useState("");
 
   useEffect(() => {
-    if (!user) {
+    dispatch(getMe());
+  }, []);
+
+  useEffect(() => {
+    if (!user && isError) {
       navigate("/login");
     }
-  }, []);
+  });
 
   const loadFile = (e) => {
     const image = e.target.files[0];

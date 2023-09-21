@@ -1,20 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logout, getMe, reset } from "../features/authSlice";
-import { useNavigate } from "react-router-dom";
+import { useFetcher, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user, isSuccess, isError, isLoading, message } = useSelector(
-    (state) => state.auth
-  );
+  const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getMe());
-  }, [dispatch]);
+  }, []);
 
   const out = async () => {
     dispatch(logout());

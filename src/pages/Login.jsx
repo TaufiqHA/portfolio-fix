@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginUser, reset } from "../features/authSlice";
+import { loginUser, reset, getMe } from "../features/authSlice";
 
 const Login = () => {
   const [email, setEmail] = useState(null);
@@ -14,15 +14,16 @@ const Login = () => {
   );
 
   useEffect(() => {
-    if (user || isSuccess) {
+    dispatch(getMe());
+    if (user && isSuccess) {
       navigate("/dashboard");
     }
-  });
+    dispatch(reset());
+  }, [user, isSuccess, dispatch, navigate]);
 
   const auth = async (e) => {
     e.preventDefault();
     dispatch(loginUser({ email, password }));
-    navigate("/dashboard");
   };
 
   return (
